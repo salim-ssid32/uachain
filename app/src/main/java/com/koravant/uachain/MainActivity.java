@@ -127,20 +127,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                Commandes.alerte(this,this,"About",getResources().getString(R.string.app_description));
                 Log.e("###", "item id 3 = "+id);
                 new AlertDialog.Builder(this)
-                        .setTitle("Nuke planet Jupiter?")
-                        .setMessage("Note that nuking planet Jupiter will destroy everything in there.")
-                        .setPositiveButton("Nuke", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Log.d("MainActivity", "Sending atomic bombs to Jupiter");
-                            }
-                        })
-                        .setNegativeButton("Abort", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Log.d("MainActivity", "Aborting mission...");
-                            }
-                        })
+                        .setTitle("UAChain Controlleur")
+                        .setMessage(R.string.about_description)
+                        .setPositiveButton("Compris", null)
                         .show();
                 break;
             default:
