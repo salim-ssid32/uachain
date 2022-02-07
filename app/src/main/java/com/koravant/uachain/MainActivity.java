@@ -8,12 +8,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import com.koravant.uachain.utils.BlockTest2;
 import com.koravant.uachain.utils.CardTest;
+import com.koravant.uachain.view.Transport;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -60,6 +62,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
 //        NavigationUI.setupWithNavController(navigationView, navController);
         navigationView.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) this);
+
+        LinearLayout transportView = findViewById(R.id.view_transport);
+        transportView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, Transport.class);
+                startActivity(i);
+            }
+        });
         // Tests
 //        Button btn = findViewById(R.id.blcktest);
 //        btn.setOnClickListener(new View.OnClickListener() {
