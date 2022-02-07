@@ -16,6 +16,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UAChain">
         <activity
+            android:name=".view.Photocopies"
+            android:exported="false" />
+        <activity
+            android:name=".view.Logement"
+            android:exported="false" />
+        <activity
+            android:name=".view.Restauration"
+            android:exported="false" />
+        <activity
             android:name=".view.Transport"
             android:exported="false" />
         <activity
