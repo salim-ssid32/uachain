@@ -121,6 +121,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_home:
                 Log.e("###", "item id 2 = "+id);
                 break;
+
+            case R.id.nav_verify:
+                Log.e("###", "item id 4 = "+id);
+                break;
+
             case R.id.nav_about:
     //                Commandes.startActivity(this,HotSpot.class);
     //                Commandes.showToast(this,this,"home");
