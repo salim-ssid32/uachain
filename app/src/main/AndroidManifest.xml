@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UAChain">
         <activity
+            android:name=".view.Transport"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity android:name=".utils.CardTest" />
