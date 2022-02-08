@@ -1,5 +1,6 @@
 package com.koravant.uachain;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +16,12 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import com.koravant.uachain.utils.BlockTest2;
 import com.koravant.uachain.utils.CardTest;
+import com.koravant.uachain.view.Enregistrement;
+import com.koravant.uachain.view.Logement;
+import com.koravant.uachain.view.Photocopies;
+import com.koravant.uachain.view.Restauration;
 import com.koravant.uachain.view.Transport;
+import com.koravant.uachain.view.Verification;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -67,8 +73,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         transportView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, Transport.class);
-                startActivity(i);
+                launchActivity(MainActivity.this, Transport.class);
+            }
+        });
+
+        LinearLayout restaurantView = findViewById(R.id.view_restaurant);
+        restaurantView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                launchActivity(MainActivity.this, Restauration.class);
+            }
+        });
+
+        LinearLayout photocopiesView = findViewById(R.id.view_photocopie);
+        photocopiesView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                launchActivity(MainActivity.this, Photocopies.class);
+            }
+        });
+
+        LinearLayout logementView = findViewById(R.id.view_logement);
+        logementView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                launchActivity(MainActivity.this, Logement.class);
             }
         });
         // Tests
@@ -91,6 +120,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        });
 
 
+    }
+
+    public void launchActivity(Context context, Class obj){
+        Intent i = new Intent(context, obj);
+        startActivity(i);
     }
 
     @Override
@@ -128,6 +162,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
 //    //                Commandes.showToast(this,this,"home");
                 Log.e("###", "item id = "+id);
+                launchActivity(MainActivity.this, Enregistrement.class);
                 break;
             case R.id.nav_home:
                 Log.e("###", "item id 2 = "+id);
@@ -135,6 +170,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.nav_verify:
                 Log.e("###", "item id 4 = "+id);
+                ;launchActivity(MainActivity.this, Verification.class);
                 break;
 
             case R.id.nav_about:

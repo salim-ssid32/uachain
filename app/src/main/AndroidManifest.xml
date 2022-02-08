@@ -16,6 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UAChain">
         <activity
+            android:name=".view.Verification"
+            android:exported="false" />
+        <activity
+            android:name=".view.Enregistrement"
+            android:exported="false" />
+        <activity
             android:name=".view.Photocopies"
             android:exported="false" />
         <activity
