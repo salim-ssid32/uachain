@@ -16,6 +16,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import com.koravant.uachain.utils.BlockTest2;
 import com.koravant.uachain.utils.CardTest;
+import com.koravant.uachain.view.Bibliotheque;
 import com.koravant.uachain.view.Enregistrement;
 import com.koravant.uachain.view.Logement;
 import com.koravant.uachain.view.Photocopies;
@@ -100,25 +101,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 launchActivity(MainActivity.this, Logement.class);
             }
         });
-        // Tests
-//        Button btn = findViewById(R.id.blcktest);
-//        btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, BlockTest2.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        Button btn2 = findViewById(R.id.cardtest);
-//        btn2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, CardTest.class);
-//                startActivity(intent);
-//            }
-//        });
 
+        LinearLayout biblioView = findViewById(R.id.view_library);
+        biblioView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                launchActivity(MainActivity.this, Bibliotheque.class);
+            }
+        });
 
     }
 
@@ -141,26 +131,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 || super.onSupportNavigateUp();
     }
 
-//    @Override
-//    public boolean onContextItemSelected(@NonNull MenuItem item) {
-////        return super.onContextItemSelected(item);
-//        Log.e("###", "item"+item.getItemId());
-//        return super.onContextItemSelected(item);
-//    }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
         switch (id){
             case R.id.nav_register:
-//                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-//                String[] recipients = new String[]{"koravant1@gmail.com", "",};
-//                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, recipients);
-//                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Write for Android Remote Hacker");
-//    //                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "This is email's message");
-//                emailIntent.setType("message/rfc822");
-//                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-//    //                Commandes.showToast(this,this,"home");
                 Log.e("###", "item id = "+id);
                 launchActivity(MainActivity.this, Enregistrement.class);
                 break;
@@ -170,13 +146,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.nav_verify:
                 Log.e("###", "item id 4 = "+id);
-                ;launchActivity(MainActivity.this, Verification.class);
+                launchActivity(MainActivity.this, Verification.class);
                 break;
 
+            case R.id.nav_geth:
+                Log.e("###", "item id 5 = "+id);
+                launchActivity(MainActivity.this, BlockTest2.class);
+                break;
+
+
             case R.id.nav_about:
-    //                Commandes.startActivity(this,HotSpot.class);
-    //                Commandes.showToast(this,this,"home");
-//                Commandes.alerte(this,this,"About",getResources().getString(R.string.app_description));
                 Log.e("###", "item id 3 = "+id);
                 new AlertDialog.Builder(this)
                         .setTitle("UAChain Controlleur")

@@ -1,9 +1,12 @@
 package com.koravant.uachain.utils;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -65,6 +68,11 @@ public class BlockTest2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_block_test2);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle("Etat du Réseau");
+        }
         BlockChain.connect();
 //        ##########################################
         Button btn2 = findViewById(R.id.btn_Account_blcktest);
@@ -110,10 +118,34 @@ public class BlockTest2 extends AppCompatActivity {
         btn5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BlockChain.sendEth(BlockChain.getCredentialFromKey(Options.blockchain_privateKey),"0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1", BigDecimal.ONE);
+                BlockChain.sendEth(BlockChain.getCredentialFromKey(Options.blockchain_privateKey),"0x9F3983dE10DBd0031D8b587B189291A1e91a5d26", BigDecimal.ONE);
                 textView5.setText(" Send ETH ");
             }
         });
+
+        //        ##########################################
+        Button btn6 = findViewById(R.id.btn_token_name);
+        TextView textView6 = findViewById(R.id.txt_token_name);
+        btn6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textView6.setText(BlockChain.getTokenName(BlockTest2.this));
+            }
+        });
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
     }
 
 

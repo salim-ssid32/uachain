@@ -1,6 +1,11 @@
 package com.koravant.uachain.utils;
 
+import android.content.Context;
 import android.util.Log;
+
+import androidx.appcompat.app.AlertDialog;
+
+import com.koravant.uachain.R;
 
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.WalletUtils;
@@ -10,13 +15,15 @@ import org.web3j.protocol.core.DefaultBlockParameter;
 import org.web3j.protocol.core.methods.response.EthAccounts;
 import org.web3j.protocol.core.methods.response.EthBlockNumber;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
-import org.web3j.protocol.exceptions.TransactionException;
+//import org.web3j.abi.datatypes.
 import org.web3j.protocol.http.HttpService;
 import org.web3j.tx.Transfer;
+import org.web3j.tx.gas.DefaultGasProvider;
 import org.web3j.utils.Convert;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 public class BlockChain {
 //    public TransactionReceipt transfert(){
@@ -41,6 +48,7 @@ public class BlockChain {
                     } catch (Exception e) {
                         e.printStackTrace();
                         isConnected =false;
+                        Options.error = e.toString();
                     }
 
                 }
@@ -124,6 +132,60 @@ public class BlockChain {
 //                sendFunds(Options.web3, destinationAddress, credentials, amountInWei);
 
 
+    }
+
+    public static boolean IsConnected(Context context){
+        if( !isConnected){
+            if(Options.error.equals("")){
+                return false;
+            }
+            new AlertDialog.Builder(context)
+                    .setTitle("Erreur de Connection")
+                    .setMessage(Options.error)
+                    .setPositiveButton("Compris", null)
+                    .show();
+            return false;
+        }
+        return true;
+    }
+
+    public static void PrintError(Context context, String error){
+        new AlertDialog.Builder(context)
+                    .setTitle("Erreur...")
+                    .setMessage(error)
+                    .setPositiveButton("Compris", null)
+                    .show();
+    }
+
+
+    public static String getTokenName(Context context){
+
+        if(!IsConnected(context)){
+            return "";
+        }
+        Wrapper wrapper = new Wrapper();
+        ERC20 javaToken = ERC20.load(Options.contractAddress, Options.web3, getCredentialFromKey(Options.ADDRESS), new DefaultGasProvider());
+        Thread th = new Thread(
+                () -> {
+                    try {
+                        wrapper.string = javaToken.name().send();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        wrapper.error = true;
+                        wrapper.errStr = e.toString();
+                    }
+                }
+        );
+        th.start();
+        try {
+            th.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        if (wrapper.error){
+            PrintError(context, wrapper.errStr);
+        }
+        return wrapper.string;
     }
 
 }

@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UAChain">
         <activity
+            android:name=".view.Bibliotheque"
+            android:exported="false" />
+        <activity
             android:name=".view.Verification"
             android:exported="false" />
         <activity

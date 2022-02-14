@@ -27,7 +27,7 @@
             android:layout_height="50dp"
             android:layout_margin="10dp"
             android:layout_marginTop="44dp"
-            android:background="@drawable/ic_home_24"/>
+            android:background="@drawable/ic_transport_24"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
             android:layout_height="50dp"
             android:layout_margin="10dp"
             android:layout_marginTop="44dp"
-            android:background="@drawable/ic_home_24"/>
+            android:background="@drawable/ic_restaurant_24"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
             android:layout_height="50dp"
             android:layout_margin="10dp"
             android:layout_marginTop="44dp"
-            android:background="@drawable/ic_home_24"/>
+            android:background="@drawable/ic_hotel_24"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -138,7 +138,7 @@
             android:layout_height="50dp"
             android:layout_margin="10dp"
             android:layout_marginTop="44dp"
-            android:background="@drawable/ic_home_24"/>
+            android:background="@drawable/ic_printshop_24"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -160,8 +160,37 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@android:color/darker_gray"
-        app:layout_constraintTop_toBottomOf="@id/view_restaurant"
+        app:layout_constraintTop_toBottomOf="@id/view_photocopie"
         tools:ignore="MissingConstraints" />
     <!--    ##############################################################################-->
 
+    <!--    ##############################################################################-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintTop_toBottomOf="@id/bar4"
+        android:id="@+id/view_library">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="44dp"
+            android:background="@drawable/ic_book_24"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BIBLIOTHEQUE"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Content1"/>
+        </LinearLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
