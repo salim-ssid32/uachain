@@ -1,5 +1,8 @@
 package com.koravant.uachain.utils;
 
+import android.widget.Toast;
+
+import com.koravant.uachain.view.Transport;
 import com.zcs.sdk.DriverManager;
 import com.zcs.sdk.SdkData;
 import com.zcs.sdk.SdkResult;
@@ -81,14 +84,20 @@ public class CardUtils {
                 String recv = StringUtils.convertBytesToHex(recvData).substring(0,
                         recvLen[0] * 2);
                 Utils.log_error("readRfCard",recv);
+                Wrapper.resultCardRead = recv;
+                Options.dialog.dismisDialog();
+//                Toast.makeText(Options.context, "Reussite de l'operation", Toast.LENGTH_LONG);
             }
         }
         else {
             Utils.log_error("readRfCard","Cannot Reset");
+            Wrapper.errorCardScanned = true;
         }
+//        Options.dialog.dismisDialog();
     }
 
-    public void searchCard(){
+    public int searchCard(){
+        Wrapper wrapper = new Wrapper();
         mCardReadManager.searchCard(CardReaderTypeEnum.RF_CARD, 0, (byte) (SdkData.RF_TYPE_A | SdkData.RF_TYPE_B | SdkData.RF_TYPE_FELICA | SdkData.RF_TYPE_N24G), new OnSearchCardListener() {
             @Override
             public void onCardInfo(CardInfoEntity cardInfoEntity) {
@@ -141,5 +150,6 @@ public class CardUtils {
 
             }
         });
+        return wrapper.out;
     }
 }

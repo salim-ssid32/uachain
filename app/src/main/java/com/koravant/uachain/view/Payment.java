@@ -3,53 +3,63 @@ package com.koravant.uachain.view;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 import com.koravant.uachain.R;
 import com.koravant.uachain.utils.CardUtils;
-import com.koravant.uachain.utils.DialogUtils;
 import com.koravant.uachain.utils.Options;
 import com.koravant.uachain.utils.PrinterUtil;
 import com.koravant.uachain.utils.Utils;
+import com.koravant.uachain.utils.Wrapper;
+import com.koravant.uachain.utils.loadingDialog;
 
-public class Transport extends AppCompatActivity {
+public class Payment extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_transport);
+        setContentView(R.layout.activity_payment);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle("Billet de Transport");
+            actionBar.setTitle("Gestionnaire de " +
+                    "Billet");
         }
-        // Payer
-        MaterialButton payer = findViewById(R.id.tr_pay);
-        payer.setOnClickListener(new View.OnClickListener() {
+        scan();
+
+        MaterialButton imprimer = findViewById(R.id.payment_printticket);
+        imprimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Options.purpose = "TRANSPORT";
-                Intent i = new Intent(Transport.this, Payment.class);
-                startActivity(i);
-
+                PrinterUtil.testPrint(Utils.getRandom(16), Options.purpose);
+                Utils.log_error("IMPRIMER", "N/A 2");
             }
         });
 
-        // Verifier
-        MaterialButton verifier = findViewById(R.id.tr_verify);
-        verifier.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Utils.log_error("VERIFIER", "N/A 2");
-            }
-        });
     }
+
+
+    public void scan(){
+        loadingDialog dialog = new loadingDialog(Payment.this);
+        Options.dialog = dialog;
+        dialog.startLoadingDialog();
+        CardUtils cardUtils = CardUtils.getInstance();
+        cardUtils.searchCard();
+//        int i = 0;
+//        while (!dialog.find){
+//            i++;
+//            if (i==5) {
+//                    dialog.dismisDialog();
+//                }
+//            }
+    }
+
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
